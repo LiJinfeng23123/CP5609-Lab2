@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Coding standards</TITLE>
+<META NAME="description" CONTENT="Coding standards">
+<META NAME="keywords" CONTENT="Practica02">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Practica02.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="Practica02.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel--> 
+<BR>
+<B> Next:</B> <A NAME="tex2html57"
+  HREF="node4.html">Task - code revision</A>
+<B> Up:</B> <A NAME="tex2html55"
+  HREF="Practica02.html">AI 4 Games Assessment</A>
+<B> Previous:</B> <A NAME="tex2html49"
+  HREF="node2.html">Instructions</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00040000000000000000">
+Coding standards</A>
+</H1>
+Coding standard help understand the purpose of each element or component
+in a computer program. They also help structuring and reinforcing solid
+structuring practices of the code. 
+The purpose of this exercise is to review the code provided and make
+revision so it conforms to the standards we will detail next.
+Reviewing code this way will help you understand even more what the code
+does, and more importantly what elements are visible and what not
+externally to a class or module.
+In many cases, these standards are also needed because of the
+way the programming language allocates and deallocates memory.
+For example, each of the three following very popular object-oriented
+programming languages has a different approach to memory management.
+Recall
+<TT>C++</TT> leaves this responsibility completely to the programmer
+with maximum flexibility.  <TT>Java</TT>  has  a garbage collector
+freeing the programmer completely of memory management responsibilities.
+<TT>Objective-C</TT> has somewhat a policy in between with tools to
+keep counts on references.
+
+<P>
+
+<OL>
+<LI>Standard for identifiers and code.
+
+<P>
+
+<UL>
+<LI>Standard names
+<BR> (<TT>AClass</TT>,<TT>_anAttributte</TT>, 
+       <TT>localVariable</TT>, <TT>aMethod</TT>).
+</LI>
+<LI>Names of methods shall be self-explanatory and without abbreviations.
+</LI>
+<LI>No boolean getters
+ <TT>anAttribute()</TT>
+and setters
+ with 
+<BR><TT>anAnttribute(newValue)</TT>.
+</LI>
+<LI>Access to Boolean values and testing the state
+of an object 
+
+<BR><TT>isCreativeCommons()</TT>, 
+<TT>isunLoaded()</TT>,  <TT>hasExpired()</TT>, 
+<BR>
+while setters and imperatives to the object
+ <TT>followCreativeCommons()</TT>, 
+<TT>unload()</TT>,  <TT>expire()</TT>, etc.
+</LI>
+<LI>When doing <TT>Unit-Testing </TT> or <TT>TDD</TT>,
+the testing methods may be an exception to the rule
+and we will use a word of verb for what is being tested
+(and the conditions for the test).
+For example:
+<TT>testAddTo List_whenNameOfArtistExists()</TT>.
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>Accessibility to members
+
+<P>
+
+<UL>
+<LI>All attributes are <TT>private</TT> (or <TT>protected</TT>  if it is justified).
+</LI>
+<LI>Select the most restrictive visibility as
+(<TT>private</TT>, <TT>protected</TT> or <TT>public</TT>) for each method.
+</LI>
+</UL>
+
+<P>
+</LI>
+<LI>Implementing methods.
+
+<P>
+
+<UL>
+<LI>Short methods, using fast exists specially when we have
+nested
+<TT>if/else</TT>s.
+</LI>
+<LI>Methods that are <TT>getters</TT>, and that do not modify the
+state of the object are always declared constant with a
+<TT>const</TT> at the end of the declaration:
+<BLOCKQUOTE>
+<TT>       ReturnType myMethod(parameters) <B>const</B>
+</TT>
+
+</BLOCKQUOTE>
+The compiler will then warns us if attributes are being modified or this
+method uses methods that are not const.
+
+<P>
+</LI>
+<LI>Parameters that are objects are passed by reference so we avoid the cost
+of copying (and allocation). The reference must be declared constant
+if the receiver methods no requires to modify the object.
+<BLOCKQUOTE>
+<TT> void myMethod( <B>const</B> Type <B>&amp;</B> object)
+</TT>
+
+</BLOCKQUOTE>
+We can only invoke constant methods on an object received as constant.
+The compiler will ensure this and that way we have no side effects
+on the received object.
+</LI>
+<LI>Parameters that are of basic types are not passed by reference, and also
+for basic references.
+<BLOCKQUOTE>
+<TT> float myMethod(int value)
+</TT>
+
+</BLOCKQUOTE>
+
+<P>
+</LI>
+<LI>We return constant references to return objects that are not basic:
+<BLOCKQUOTE>
+<TT><B>const</B> Type <B>&amp;</B> myMethod() <B>const</B>  return _member; 
+</TT>
+
+</BLOCKQUOTE>
+
+<P>
+</LI>
+<LI>We do clone (copy) objects we return when created locally
+inside a proprietary methods (name these methods informally
+as getters by construction).
+<BLOCKQUOTE>
+<TT>Type myMethod() { Type result; ...; return result; }
+</TT>
+
+</BLOCKQUOTE>
+The reason is we do not return references to objects that expire when out current
+context's method terminates.
+</LI>
+<LI>When the parameter passing or the return reference value transfer the
+responsibility of eliminating the object (and recycling its memory),
+we will use as a standard a counter of references.
+<BLOCKQUOTE>
+<TT>// We transfer to the caller the object that was on the receiver: 
+<BR>
+Type * extractObject();   
+<BR> 
+<BR> // Create and transfer to caller (no longer in receiver)  
+<BR>
+Type * createType() const;  
+<BR> 
+<BR> // Transfer to caller and no longer in receptor  
+<BR>
+void adopt(Type *); 
+<BR> 
+<BR> // Transfer to the caller and elimination 
+<BR>
+void eliminated(Type *) const;
+</TT>
+
+</BLOCKQUOTE>
+
+<P>
+</LI>
+</UL>
+</LI>
+</OL>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A NAME="tex2html59"
+  HREF="node4.html">Task - code revision </A>
+</UL>
+<!--End of Table of Child-Links-->
+<!--Navigation Panel-->
+<!--<DIV CLASS="navigation"><HR>
+<BR>
+<B> Next:</B> <A NAME="tex2html57"
+  HREF="node4.html">Task - code revision</A>
+<B> Up:</B> <A NAME="tex2html55"
+  HREF="Practica02.html">AI 4 Games Assessment</A>
+<B> Previous:</B> <A NAME="tex2html49"
+  HREF="node2.html">Instructions</A></DIV>-->
+<!--End of Navigation Panel-->
+<ADDRESS>
+Vladimir Estivill-Castro
+2011-12-24
+</ADDRESS>
+</BODY>
+</HTML>

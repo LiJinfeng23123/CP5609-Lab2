@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The pattern MVC</TITLE>
+<META NAME="description" CONTENT="The pattern MVC">
+<META NAME="keywords" CONTENT="Practica02">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Practica02.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY  bgcolor="#ffffff">
+
+<DIV CLASS="navigation"><!--Navigation Panel-->  
+<BR>
+<B> Next:</B> <A NAME="tex2html237"
+  HREF="node7.html">Task - MVC pattern</A>
+<B> Up:</B> <A NAME="tex2html235"
+  HREF="node5.html">Patterns</A>
+<B> Previous:</B> <A NAME="tex2html229"
+  HREF="node5.html">Patterns</A>
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00039100000000000000">
+The pattern MVC</A>
+</H3>
+The Model View Controller (MVC)
+<BR>(<SMALL CLASS="SMALL"><TT><A NAME="tex2html12"
+  HREF="
+http://en.wikipedia.org/wiki/Model">http://en.wikipedia.org/wiki/Model</A></TT>)
+is an architectural design pattern of software engineering
+that enables to separate the responsibilities of
+the domain logic from the responsibilities of
+the graphical user interface, and also from the logic of maintaining
+a model.
+It maintains a clear interface between the GUI and the model and uses the
+controller to update the model when users generate events
+or even to update the GUI when the model changes due to
+internal events.
+</SMALL>
+<P>
+<SMALL CLASS="SMALL">That is, the model separates the data of an application, the interface with the
+user and the control logic into different component
+(each component may be made of one or of many classes).
+This style of request and response is frequent in Web application
+where the view is usually HTML pages and the model
+is a back end database model.
+</SMALL>
+<P>
+<SMALL CLASS="SMALL">This architecture improves development, but more importantly, it enables
+easier software maintenance. The architecture of a computer game organized
+this way enables the modification of the user interface
+while still reusing the model and the controller.
+There are several implementation of the MVC pattern, but usually
+the flow of interaction is as follows:
+</SMALL>
+<OL>
+<LI>Users interact with the interface,
+and they generate a request.
+</LI>
+<LI>The controller captures such request from the user interface
+and associates an action that is suitable to apply to the model.
+</LI>
+<LI>The controller notifies the model of the action
+and probably observes a change of state in the model that corresponds to a response for the
+requested action.
+</LI>
+<LI>The controller reviews and makes request to the user interface to
+update presentation in accordance with the new state of the model.
+</LI>
+</OL>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<BR>
+<B> Next:</B> <A NAME="tex2html237"
+  HREF="node7.html">Task - MVC pattern</A>
+<B> Up:</B> <A NAME="tex2html235"
+  HREF="node5.html">Patterns</A>
+<B> Previous:</B> <A NAME="tex2html229"
+  HREF="node5.html">Patterns</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Vladimir Estivill-Castro
+2011-12-23
+</ADDRESS>
+</BODY>
+</HTML>
